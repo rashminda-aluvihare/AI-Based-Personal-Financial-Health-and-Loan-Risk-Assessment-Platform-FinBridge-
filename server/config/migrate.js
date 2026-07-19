@@ -157,8 +157,8 @@ async function runMigrations() {
     console.log('Database Migrations completed successfully.');
     
     // Auto-seed Admin User securely
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@finbridge.lk';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'AdminSecurePass123!';
+    const adminEmail = process.env.SYS_ADMIN_EMAIL || 'admin@finbridge.lk';
+    const adminPassword = process.env.SYS_ADMIN_PASSWORD || 'AdminSecurePass123!';
     
     const adminCheck = await db.query("SELECT * FROM users WHERE email = $1", [adminEmail]);
     if (adminCheck.rows.length === 0) {
