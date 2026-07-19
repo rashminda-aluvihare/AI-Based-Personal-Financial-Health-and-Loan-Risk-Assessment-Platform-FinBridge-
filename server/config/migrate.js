@@ -160,9 +160,12 @@ async function runMigrations() {
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@finbridge.lk';
     const adminPassword = process.env.ADMIN_PASSWORD || 'AdminSecurePass123!';
     
-    const adminCheck = await db.query("SELECT * FROM users WHERE role = 'admin'");
+    const adminCheck = await db.query("SELECT * FROM users WHERE email = $1", [adminEmail]);
     if (adminCheck.rows.length === 0) {
-      console.log('No Admin user found in database. Seeding Admin user securely from environment variables...');
+      console.log('No Admin user found in database matching env credentials. Seeding Admin user...');
+      // Clear old admins
+      await db.query("DELETE FROM users WHERE role = 'admin'");
+      
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(adminPassword, salt);
       
