@@ -148,11 +148,30 @@ CREATE TABLE IF NOT EXISTS admin_logs (
 );
 `;
 
+const bcrypt = require('bcryptjs');
+
 async function runMigrations() {
   console.log('Starting PostgreSQL Database Migrations...');
   try {
     await db.query(ddl);
     console.log('Database Migrations completed successfully.');
+    
+    // Auto-seed Admin User securely
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@finbridge.lk';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'AdminSecurePass123!';
+    
+    const adminCheck = await db.query("SELECT * FROM users WHERE role = 'admin'");
+    if (adminCheck.rows.length === 0) {
+      console.log('No Admin user found in database. Seeding Admin user securely from environment variables...');
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(adminPassword, salt);
+      
+      await db.query(
+        "INSERT INTO users (name, email, phone, password, role) VALUES ($1, $2, $3, $4, $5)",
+        ['Platform Administrator', adminEmail, '+94770000000', hashedPassword, 'admin']
+      );
+      console.log(`Admin user successfully seeded. Email: ${adminEmail}`);
+    }
   } catch (err) {
     console.error('Migration failed:', err.message);
   }
