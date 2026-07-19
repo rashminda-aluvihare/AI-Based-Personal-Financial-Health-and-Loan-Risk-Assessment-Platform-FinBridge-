@@ -1,45 +1,78 @@
 import { create } from 'zustand';
 import { Language } from './i18n';
-import { Transaction, ActiveLoan, mockTransactions, mockActiveLoans, LoanProduct, mockLoanProducts } from './mock-data';
+
+export interface IncomeRecord {
+  id: string;
+  source: string;
+  amount: number;
+  date: string;
+}
+
+export interface ExpenseRecord {
+  id: string;
+  category: string;
+  amount: number;
+  date: string;
+}
+
+export interface LoanRecord {
+  id: string;
+  loanName: string;
+  remainingAmount: number;
+  monthlyEmi: number;
+  interestRate: number;
+  startDate: string;
+  endDate: string;
+}
+
+export interface GoalRecord {
+  id: string;
+  name: string;
+  targetAmount: number;
+  currentAmount: number;
+  targetDate: string;
+}
 
 interface AppState {
   language: Language;
   role: 'borrower' | 'lender' | 'admin';
+  theme: 'dark' | 'dim' | 'light';
   user: {
     name: string;
     phone: string;
     avatar: string;
   };
-  walletBalance: number;
-  transactions: Transaction[];
-  activeLoans: ActiveLoan[];
-  savingsGoals: {
-    id: string;
-    name: string;
-    nameSi: string;
-    nameTa: string;
-    target: number;
-    current: number;
-  }[];
-  adminApprovalQueue: {
-    id: string;
-    borrowerName: string;
-    loanProduct: string;
-    amount: number;
-    score: number;
-    risk: 'Low' | 'Medium' | 'High' | 'Very High';
-  }[];
-  theme: 'dark' | 'dim' | 'light';
   
+  // CRUD Data Lists
+  incomeRecords: IncomeRecord[];
+  expenseRecords: ExpenseRecord[];
+  loanRecords: LoanRecord[];
+  goals: GoalRecord[];
+  
+  // Model state variables
+  financialScore: number;
+  loanRisk: 'Low' | 'Medium' | 'High';
+  recommendations: string[];
+
   setLanguage: (lang: Language) => void;
   setRole: (role: 'borrower' | 'lender' | 'admin') => void;
   setTheme: (theme: 'dark' | 'dim' | 'light') => void;
-  topUpWallet: (amount: number) => void;
-  sendMoney: (amount: number, recipientPhone: string, noteEn: string, noteSi: string, noteTa: string, category: 'Farming' | 'Business' | 'Medical' | 'Education' | 'Utility' | 'Personal') => boolean;
-  applyForLoan: (amount: number, productName: string, productNameSi: string, productNameTa: string, interestRate: number, tenure: number) => void;
-  repayLoanInstallment: (loanId: string) => boolean;
-  approveLoanInQueue: (queueId: string) => void;
-  rejectLoanInQueue: (queueId: string) => void;
+  
+  // CRUD Actions
+  addIncome: (rec: Omit<IncomeRecord, 'id'>) => void;
+  deleteIncome: (id: string) => void;
+  
+  addExpense: (rec: Omit<ExpenseRecord, 'id'>) => void;
+  deleteExpense: (id: string) => void;
+  
+  addLoan: (rec: Omit<LoanRecord, 'id'>) => void;
+  deleteLoan: (id: string) => void;
+  
+  addGoal: (rec: Omit<GoalRecord, 'id'>) => void;
+  deleteGoal: (id: string) => void;
+  updateGoalAmount: (id: string, amount: number) => void;
+
+  recalculateAIEngines: () => void;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -51,180 +84,117 @@ export const useAppStore = create<AppState>((set, get) => ({
     phone: '+94 77 123 4567',
     avatar: '/avatar-profile.jpg'
   },
-  walletBalance: 132500,
-  transactions: mockTransactions,
-  activeLoans: mockActiveLoans,
-  savingsGoals: [
-    {
-      id: "goal-1",
-      name: "Smart Drip Irrigation System Fund",
-      nameSi: "ස්මාර්ට් බිංදු ජල සම්පාදන අරමුදල",
-      nameTa: "சொட்டு நீர் பாசன அமைப்பு நிதி",
-      target: 120000,
-      current: 45000
-    },
-    {
-      id: "goal-2",
-      name: "Children Vocational Education Fund",
-      nameSi: "දරුවන්ගේ වෘත්තීය අධ්‍යාපන අරමුදල",
-      nameTa: "பிள்ளைகளின் தொழிற்கல்வி நிதி",
-      target: 60000,
-      current: 35000
-    }
+  
+  // Pre-populate with mock data mapping to spec values
+  incomeRecords: [
+    { id: "inc-1", source: "Salary", amount: 120000, date: "2026-07-01" },
+    { id: "inc-2", source: "Freelancing", amount: 25000, date: "2026-07-15" }
   ],
-  adminApprovalQueue: [
-    {
-      id: "q-1",
-      borrowerName: "Bandara Rambukwella",
-      loanProduct: "Diriya Farmer Micro-Loan",
-      amount: 45000,
-      score: 720,
-      risk: "Medium"
-    },
-    {
-      id: "q-2",
-      borrowerName: "K. Selvakumar",
-      loanProduct: "Jaffna Fishery Expansion Fund",
-      amount: 90000,
-      score: 590,
-      risk: "High"
-    }
+  expenseRecords: [
+    { id: "exp-1", category: "Food", amount: 15000, date: "2026-07-02" },
+    { id: "exp-2", category: "Bills", amount: 25000, date: "2026-07-05" },
+    { id: "exp-3", category: "Transport", amount: 8000, date: "2026-07-10" },
+    { id: "exp-4", category: "Shopping", amount: 12000, date: "2026-07-12" }
+  ],
+  loanRecords: [
+    { id: "loan-1", loanName: "Personal Bank Loan", remainingAmount: 240000, monthlyEmi: 15000, interestRate: 12, startDate: "2025-01-01", endDate: "2027-01-01" },
+    { id: "loan-2", loanName: "Credit Card Debt", remainingAmount: 45000, monthlyEmi: 5000, interestRate: 24, startDate: "2026-03-01", endDate: "2026-12-01" }
+  ],
+  goals: [
+    { id: "goal-1", name: "Emergency Fund Setup", targetAmount: 500000, currentAmount: 120000, targetDate: "2027-12-31" },
+    { id: "goal-2", name: "Buy Agricultural Land", targetAmount: 1200000, currentAmount: 180000, targetDate: "2029-06-30" }
   ],
   
+  financialScore: 82,
+  loanRisk: 'Medium',
+  recommendations: [
+    "Reduce monthly shopping expenses by 15% to increase savings velocity.",
+    "Prioritize paying off the credit card debt first to escape the 24% high interest rate.",
+    "Build emergency fund savings to cover at least 3 months of EMI payments."
+  ],
+
   setLanguage: (lang) => set({ language: lang }),
   setRole: (role) => set({ role: role }),
   setTheme: (theme) => set({ theme: theme }),
-  topUpWallet: (amount) => {
-    const newTx: Transaction = {
-      id: `tx-${Date.now()}`,
-      date: new Date().toISOString().split('T')[0],
-      type: 'topup',
-      amount: amount,
-      reference: 'Simulated Wallet Top-Up',
-      referenceSi: 'පසුම්බි මුදල් පිරවීම',
-      referenceTa: 'வாலட் டாப்-அப்',
-      category: 'System'
-    };
+
+  addIncome: (rec) => {
+    const newRec = { ...rec, id: `inc-${Date.now()}` };
+    set((state) => ({ incomeRecords: [newRec, ...state.incomeRecords] }));
+    get().recalculateAIEngines();
+  },
+  deleteIncome: (id) => {
+    set((state) => ({ incomeRecords: state.incomeRecords.filter(r => r.id !== id) }));
+    get().recalculateAIEngines();
+  },
+
+  addExpense: (rec) => {
+    const newRec = { ...rec, id: `exp-${Date.now()}` };
+    set((state) => ({ expenseRecords: [newRec, ...state.expenseRecords] }));
+    get().recalculateAIEngines();
+  },
+  deleteExpense: (id) => {
+    set((state) => ({ expenseRecords: state.expenseRecords.filter(r => r.id !== id) }));
+    get().recalculateAIEngines();
+  },
+
+  addLoan: (rec) => {
+    const newRec = { ...rec, id: `loan-${Date.now()}` };
+    set((state) => ({ loanRecords: [newRec, ...state.loanRecords] }));
+    get().recalculateAIEngines();
+  },
+  deleteLoan: (id) => {
+    set((state) => ({ loanRecords: state.loanRecords.filter(r => r.id !== id) }));
+    get().recalculateAIEngines();
+  },
+
+  addGoal: (rec) => {
+    const newRec = { ...rec, id: `goal-${Date.now()}` };
+    set((state) => ({ goals: [newRec, ...state.goals] }));
+  },
+  deleteGoal: (id) => {
+    set((state) => ({ goals: state.goals.filter(r => r.id !== id) }));
+  },
+  updateGoalAmount: (id, amount) => {
     set((state) => ({
-      walletBalance: state.walletBalance + amount,
-      transactions: [newTx, ...state.transactions]
+      goals: state.goals.map(g => g.id === id ? { ...g, currentAmount: g.currentAmount + amount } : g)
     }));
   },
-  sendMoney: (amount, recipientPhone, noteEn, noteSi, noteTa, category) => {
+
+  // Auto AI scoring client calculations to make sliders interactively alive
+  recalculateAIEngines: () => {
     const state = get();
-    if (state.walletBalance < amount) return false;
+    const totalIncome = state.incomeRecords.reduce((sum, r) => sum + r.amount, 0);
+    const totalExpenses = state.expenseRecords.reduce((sum, r) => sum + r.amount, 0);
+    const totalEmi = state.loanRecords.reduce((sum, r) => sum + r.monthlyEmi, 0);
+    const totalSavings = state.goals.reduce((sum, r) => sum + r.currentAmount, 0);
+
+    const dti = totalIncome > 0 ? (totalEmi / totalIncome) : 0;
+    const savingsRatio = totalIncome > 0 ? (totalSavings / totalIncome) : 0;
     
-    const newTx: Transaction = {
-      id: `tx-${Date.now()}`,
-      date: new Date().toISOString().split('T')[0],
-      type: 'transfer_out',
-      amount: amount,
-      reference: `${noteEn} (${recipientPhone})`,
-      referenceSi: `${noteSi} (${recipientPhone})`,
-      referenceTa: `${noteTa} (${recipientPhone})`,
-      category: category
-    };
-    
+    // Simulate score mapping (0 - 100)
+    let score = 75;
+    if (dti > 0.40) score -= 15;
+    else if (dti < 0.20) score += 10;
+
+    if (totalExpenses > totalIncome) score -= 20;
+    else if (totalExpenses < totalIncome * 0.6) score += 10;
+
+    score = Math.min(100, Math.max(10, score));
+
+    // Risk mapping
+    const risk = score >= 80 ? 'Low' : score >= 50 ? 'Medium' : 'High';
+
+    // Recommendations mapping
+    const recs = [];
+    if (dti > 0.35) recs.push("Avoid taking another loan. Debt Ratio is high.");
+    if (totalExpenses > totalIncome) recs.push("Immediately reduce discretionary expenses to cover monthly budget gap.");
+    if (totalSavings < 100000) recs.push("Increase emergency savings to build safety net buffers.");
+    if (recs.length === 0) recs.push("Financial parameters are stable. Maintain consistent savings patterns.");
+
     set({
-      walletBalance: state.walletBalance - amount,
-      transactions: [newTx, ...state.transactions]
+      financialScore: score,
+      loanRisk: risk,
+      recommendations: recs
     });
-    return true;
-  },
-  applyForLoan: (amount, productName, productNameSi, productNameTa, interestRate, tenure) => {
-    const state = get();
-    // Simulate auto-adding to admin approval queue
-    const newQueueItem = {
-      id: `q-${Date.now()}`,
-      borrowerName: state.user.name,
-      loanProduct: productName,
-      amount: amount,
-      score: 745, // Precheck mock score
-      risk: "Low" as const
-    };
-    set({
-      adminApprovalQueue: [newQueueItem, ...state.adminApprovalQueue]
-    });
-  },
-  repayLoanInstallment: (loanId) => {
-    const state = get();
-    const loan = state.activeLoans.find(l => l.id === loanId);
-    if (!loan) return false;
-    if (state.walletBalance < loan.nextPaymentAmount) return false;
-    
-    const newTx: Transaction = {
-      id: `tx-${Date.now()}`,
-      date: new Date().toISOString().split('T')[0],
-      type: 'repayment',
-      amount: loan.nextPaymentAmount,
-      reference: `EMI Paid for ${loan.productName}`,
-      referenceSi: `${loan.productNameSi} සදහා EMI වාරිකය ගෙවන ලදී`,
-      referenceTa: `${loan.productNameTa} க்கான தவணை செலுத்தப்பட்டது`,
-      category: 'System'
-    };
-    
-    const updatedLoans = state.activeLoans.map(l => {
-      if (l.id === loanId) {
-        const remaining = Math.max(0, l.remainingAmount - l.nextPaymentAmount);
-        const nextPaid = l.paidInstallments + 1;
-        return {
-          ...l,
-          remainingAmount: remaining,
-          paidInstallments: nextPaid,
-        };
-      }
-      return l;
-    }).filter(l => l.remainingAmount > 0);
-    
-    set({
-      walletBalance: state.walletBalance - loan.nextPaymentAmount,
-      transactions: [newTx, ...state.transactions],
-      activeLoans: updatedLoans
-    });
-    return true;
-  },
-  approveLoanInQueue: (queueId) => {
-    const state = get();
-    const loanToApprove = state.adminApprovalQueue.find(q => q.id === queueId);
-    if (!loanToApprove) return;
-    
-    // Add transaction for disbursement
-    const newTx: Transaction = {
-      id: `tx-${Date.now()}`,
-      date: new Date().toISOString().split('T')[0],
-      type: 'disbursement',
-      amount: loanToApprove.amount,
-      reference: `Approved: ${loanToApprove.loanProduct}`,
-      referenceSi: `අනුමතයි: ${loanToApprove.loanProduct}`,
-      referenceTa: `அனுமதிக்கப்பட்டது: ${loanToApprove.loanProduct}`,
-      category: 'Business'
-    };
-    
-    // Add to active loans
-    const newActiveLoan: ActiveLoan = {
-      id: `active-${Date.now()}`,
-      productName: loanToApprove.loanProduct,
-      productNameSi: loanToApprove.loanProduct, // Simplified mapping
-      productNameTa: loanToApprove.loanProduct,
-      amount: loanToApprove.amount,
-      remainingAmount: loanToApprove.amount * 1.12, // +12% interest for simulated simplicity
-      nextPaymentDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      interestRate: 12,
-      nextPaymentAmount: Math.round((loanToApprove.amount * 1.12) / 12),
-      paidInstallments: 0,
-      totalInstallments: 12
-    };
-    
-    set({
-      walletBalance: state.walletBalance + loanToApprove.amount,
-      transactions: [newTx, ...state.transactions],
-      activeLoans: [...state.activeLoans, newActiveLoan],
-      adminApprovalQueue: state.adminApprovalQueue.filter(q => q.id !== queueId)
-    });
-  },
-  rejectLoanInQueue: (queueId) => {
-    set((state) => ({
-      adminApprovalQueue: state.adminApprovalQueue.filter(q => q.id !== queueId)
-    }));
   }
 }));

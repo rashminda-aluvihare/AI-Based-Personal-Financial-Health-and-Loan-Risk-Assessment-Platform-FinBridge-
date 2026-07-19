@@ -7,11 +7,11 @@ import { useAppStore } from '@/lib/store';
 import { translations } from '@/lib/i18n';
 import { 
   LayoutDashboard, 
-  Wallet, 
+  PlusCircle, 
+  MinusCircle, 
   Banknote, 
-  ShieldAlert, 
-  TrendingUp, 
-  Settings 
+  Target, 
+  GraduationCap 
 } from 'lucide-react';
 
 export default function MobileNav() {
@@ -27,34 +27,34 @@ export default function MobileNav() {
       roles: ['borrower', 'lender', 'admin']
     },
     {
-      name: t.wallet,
-      path: "/wallet",
-      icon: Wallet,
+      name: t.incomeManager.split(' ')[0],
+      path: "/income",
+      icon: PlusCircle,
       roles: ['borrower', 'lender', 'admin']
     },
     {
-      name: t.loans,
+      name: t.expenseTracker.split(' ')[0],
+      path: "/expense",
+      icon: MinusCircle,
+      roles: ['borrower', 'lender', 'admin']
+    },
+    {
+      name: t.loanTracker.split(' ')[0],
       path: "/loans",
       icon: Banknote,
       roles: ['borrower', 'lender', 'admin']
     },
     {
-      name: t.riskAssessment,
-      path: "/risk-assessment",
-      icon: ShieldAlert,
+      name: t.goalPlanner.split(' ')[0],
+      path: "/goals",
+      icon: Target,
       roles: ['borrower', 'lender', 'admin']
     },
     {
-      name: t.lenderPanel,
-      path: "/lender",
-      icon: TrendingUp,
-      roles: ['lender', 'admin']
-    },
-    {
-      name: t.adminConsole,
-      path: "/admin",
-      icon: Settings,
-      roles: ['admin']
+      name: t.literacyHub.split(' ')[0],
+      path: "/literacy",
+      icon: GraduationCap,
+      roles: ['borrower', 'lender', 'admin']
     }
   ];
 

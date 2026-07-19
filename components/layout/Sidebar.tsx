@@ -7,12 +7,12 @@ import { useAppStore } from '@/lib/store';
 import { translations } from '@/lib/i18n';
 import { 
   LayoutDashboard, 
-  Wallet, 
+  PlusCircle, 
+  MinusCircle, 
   Banknote, 
-  ShieldAlert, 
-  TrendingUp, 
+  Target, 
+  GraduationCap, 
   Settings, 
-  LogOut,
   HelpCircle
 } from 'lucide-react';
 
@@ -30,33 +30,39 @@ export default function Sidebar() {
       color: "text-[#6C63FF]"
     },
     {
-      name: t.wallet,
-      path: "/wallet",
-      icon: Wallet,
+      name: t.incomeManager,
+      path: "/income",
+      icon: PlusCircle,
       roles: ['borrower', 'lender', 'admin'],
       color: "text-[#00D4AA]"
     },
     {
-      name: t.loans,
+      name: t.expenseTracker,
+      path: "/expense",
+      icon: MinusCircle,
+      roles: ['borrower', 'lender', 'admin'],
+      color: "text-rose-400"
+    },
+    {
+      name: t.loanTracker,
       path: "/loans",
       icon: Banknote,
       roles: ['borrower', 'lender', 'admin'],
       color: "text-amber-400"
     },
     {
-      name: t.riskAssessment,
-      path: "/risk-assessment",
-      icon: ShieldAlert,
+      name: t.goalPlanner,
+      path: "/goals",
+      icon: Target,
       roles: ['borrower', 'lender', 'admin'],
       color: "text-cyan-400"
     },
     {
-      name: t.lenderPanel,
-      path: "/lender",
-      icon: TrendingUp,
-      roles: ['lender', 'admin'],
-      color: "text-emerald-400",
-      badge: "Lender"
+      name: t.literacyHub,
+      path: "/literacy",
+      icon: GraduationCap,
+      roles: ['borrower', 'lender', 'admin'],
+      color: "text-emerald-400"
     },
     {
       name: t.adminConsole,
@@ -97,9 +103,7 @@ export default function Sidebar() {
                   <span className="text-sm">{item.name}</span>
                 </div>
                 {item.badge && (
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-mono ${
-                    item.badge === 'Admin' ? 'bg-[#FF6B6B]/20 text-[#FF6B6B]' : 'bg-[#00D4AA]/20 text-[#00D4AA]'
-                  }`}>
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-mono bg-[#FF6B6B]/20 text-[#FF6B6B]`}>
                     {item.badge}
                   </span>
                 )}
@@ -112,10 +116,10 @@ export default function Sidebar() {
         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
           <div className="flex items-center space-x-2 text-xs font-semibold text-[#00D4AA]">
             <HelpCircle className="w-4 h-4" />
-            <span>Sri Lanka Micro-Credit</span>
+            <span>Financial Wellness</span>
           </div>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            Credit Assessment factors CEB electricity payments, local community ratings, and agricultural savings ratios to calculate fair risk scores.
+            FinBridge monitors your DTI, monthly expenses, savings trends, and credit parameters dynamically to generate personalized AI recommendation reports.
           </p>
         </div>
       </div>
@@ -124,7 +128,7 @@ export default function Sidebar() {
       <div className="space-y-4">
         <div className="h-[1px] bg-white/10"></div>
         <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
-          <span>v1.0.0</span>
+          <span>v1.1.0</span>
           <span>© FinBridge SL</span>
         </div>
       </div>
