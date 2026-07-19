@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0A0E1A; /* Deep Navy Dark */
+  --foreground: #F8FAFC;
+  --card-bg: rgba(17, 24, 39, 0.45);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --font-sans: var(--font-sans), sans-serif;
+  --font-display: var(--font-display), sans-serif;
+}
+
+.theme-dim {
+  --background: #111827; /* Softer Charcoal Dark Mode */
+  --foreground: #F1F5F9;
+  --card-bg: rgba(31, 41, 55, 0.5);
+  --card-border: rgba(255, 255, 255, 0.1);
+}
+
+.theme-light {
+  --background: #F8FAFC; /* Modern Clean Light Mode */
+  --foreground: #0F172A;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom contrast overrides for Light Theme to keep things perfectly visible */
+.theme-light .text-slate-400 { color: #475569; }
+.theme-light .text-slate-500 { color: #334155; }
+.theme-light .text-slate-300 { color: #1E293B; }
+.theme-light .text-slate-200 { color: #0F172A; }
+.theme-light .text-white { color: #0F172A; }
+.theme-light input { color: #0F172A; }
+.theme-light select { color: #0F172A; }
+
+/* Custom Scrollbar Styles for premium layout */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 14, 26, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(108, 99, 255, 0.4);
+}
+
+/* Glassmorphism utility card class */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Accent glow filters */
+.glow-indigo {
+  box-shadow: 0 0 40px rgba(108, 99, 255, 0.15);
+}
+
+.glow-teal {
+  box-shadow: 0 0 40px rgba(0, 212, 170, 0.15);
+}
+
+.glow-coral {
+  box-shadow: 0 0 40px rgba(255, 107, 107, 0.15);
+}
+
+/* Animation utilities */
+@keyframes mesh-pulse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+.mesh-glow-1 {
+  animation: mesh-pulse 15s infinite ease-in-out;
+}
+
+.mesh-glow-2 {
+  animation: mesh-pulse 20s infinite ease-in-out alternate;
+}
