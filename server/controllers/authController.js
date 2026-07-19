@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mailer = require('../config/mailer');
 require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'finbridge_jwt_secret_token';
@@ -26,6 +27,9 @@ exports.register = async (req, res) => {
     );
 
     const user = newUser.rows[0];
+
+    // Trigger Admin email alert notification asynchronously
+    mailer.sendAdminRegistrationAlert(user).catch(err => console.error('Alert email delivery background error:', err));
 
     // Create JWT
     const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
