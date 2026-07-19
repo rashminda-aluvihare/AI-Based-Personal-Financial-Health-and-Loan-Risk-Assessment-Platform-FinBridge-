@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const db = require('./config/db');
+const runMigrations = require('./config/migrate');
 require('dotenv').config();
 
 const app = express();
@@ -21,8 +22,10 @@ app.get('/health', (req, res) => {
 // Port configuration for local & Railway environment
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Express Gateway Server running on port ${PORT}`);
+  // Run schema migrations automatically
+  await runMigrations();
   // Test connection on launch
   db.query('SELECT NOW()')
     .then((res) => console.log('Ping check database time:', res.rows[0].now))
