@@ -78,7 +78,7 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
   language: 'en',
   role: 'borrower',
-  theme: 'dark',
+  theme: 'light',
   user: {
     name: 'Rashminda Aluvihare',
     phone: '+94 77 123 4567',

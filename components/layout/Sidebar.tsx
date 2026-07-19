@@ -78,7 +78,7 @@ export default function Sidebar() {
   const visibleItems = menuItems.filter(item => item.roles.includes(role));
 
   return (
-    <aside className="w-64 h-[calc(100vh-73px)] border-r border-white/10 bg-[#0A0E1A] p-4 flex flex-col justify-between hidden md:flex">
+    <aside className="w-64 h-[calc(100vh-73px)] border-r border-black/5 dark:border-white/10 bg-[var(--sidebar-bg)] p-4 flex flex-col justify-between hidden md:flex">
       <div className="space-y-6">
         {/* Navigation Section */}
         <div className="space-y-1">
