@@ -39,9 +39,7 @@ export default function LandingPage() {
       {/* Header bar */}
       <header className="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center font-bold text-white text-xl tracking-tight shadow-lg shadow-blue-600/10">
-            FB
-          </div>
+          <img src="/logo_icon.png" alt="FinBridge Logo" className="w-10 h-10 rounded-xl object-cover shadow-sm border border-slate-200" />
           <div>
             <span className="font-extrabold text-xl text-slate-900">
               {t.brand}

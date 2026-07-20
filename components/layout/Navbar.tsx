@@ -27,9 +27,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#0A0E1A]/85 backdrop-blur-md px-6 py-4 flex items-center justify-between">
       {/* Brand logo */}
       <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#6C63FF] to-[#00D4AA] flex items-center justify-center font-bold text-white text-xl tracking-tight shadow-[0_0_15px_rgba(108,99,255,0.4)]">
-          FB
-        </div>
+        <img src="/logo_icon.png" alt="FinBridge Logo" className="w-10 h-10 rounded-xl object-cover shadow-md border border-white/10" />
         <div>
           <span className="font-extrabold text-xl bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
             {t.brand}
