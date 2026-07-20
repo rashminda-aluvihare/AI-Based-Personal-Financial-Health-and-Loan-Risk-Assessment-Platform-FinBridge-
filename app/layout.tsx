@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import AppLayout from "@/components/layout/AppLayout";
 
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-display",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "FinBridge | AI-Based Microfinance & Digital Wallet",
-  description: "Advanced AI loan risk assessment platform and secure digital wallet for Sri Lanka.",
+  title: "FinBridge | AI Financial Health & Loan Risk Assessment",
+  description: "Advanced AI loan risk assessment platform and personal financial health for Sri Lanka.",
 };
 
 export default function RootLayout({
@@ -24,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="h-full font-sans">
         <AppLayout>{children}</AppLayout>
       </body>

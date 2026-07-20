@@ -103,7 +103,7 @@ export default function Sidebar() {
                   <span className="text-sm">{item.name}</span>
                 </div>
                 {item.badge && (
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-mono bg-[#FF6B6B]/20 text-[#FF6B6B]`}>
+                  <span className="text-[9px] px-2 py-0.5 rounded-full font-bold bg-rose-500/10 text-rose-600 dark:text-[#FF6B6B]">
                     {item.badge}
                   </span>
                 )}
@@ -113,21 +113,21 @@ export default function Sidebar() {
         </div>
 
         {/* Informative Microfinance Sri Lanka Box */}
-        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-          <div className="flex items-center space-x-2 text-xs font-semibold text-[#00D4AA]">
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 space-y-2">
+          <div className="flex items-center space-x-2 text-xs font-bold text-blue-600 dark:text-[#00D4AA]">
             <HelpCircle className="w-4 h-4" />
             <span>Financial Wellness</span>
           </div>
-          <p className="text-[11px] text-slate-400 leading-relaxed">
+          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
             FinBridge monitors your DTI, monthly expenses, savings trends, and credit parameters dynamically to generate personalized AI recommendation reports.
           </p>
         </div>
       </div>
 
       {/* Footer Info */}
-      <div className="space-y-4">
-        <div className="h-[1px] bg-white/10"></div>
-        <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
+      <div className="space-y-3">
+        <div className="h-[1px] bg-slate-200 dark:bg-white/10"></div>
+        <div className="flex items-center justify-between text-xs text-slate-500 font-semibold">
           <span>v1.1.0</span>
           <span>© FinBridge SL</span>
         </div>

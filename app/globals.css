@@ -7,8 +7,8 @@
   --card-bg: #FFFFFF; /* Pure White Cards */
   --card-border: rgba(15, 23, 42, 0.06); /* Ultra-Soft Border */
   --sidebar-bg: #FFFFFF;
-  --font-sans: var(--font-sans), sans-serif;
-  --font-display: var(--font-display), sans-serif;
+  --font-sans: var(--font-sans), 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-sans), 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* DARK MODE OVERRIDES */

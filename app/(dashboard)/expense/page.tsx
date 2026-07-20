@@ -57,26 +57,26 @@ export default function ExpensePage() {
       {/* Title */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-black text-white font-display tracking-tight">{t.expenseTracker}</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{t.expenseTracker}</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Log and categorize your daily and monthly payments to analyze expenditure leaks.
           </p>
         </div>
 
         <button
           onClick={() => setModalOpen(true)}
-          className="flex items-center space-x-1.5 px-4 py-2.5 bg-gradient-to-r from-[#6C63FF] to-[#FF6B6B] text-white font-semibold text-xs rounded-xl shadow-md hover:scale-102 transition"
+          className="flex items-center space-x-1.5 px-4 py-2.5 bg-rose-600 text-white font-semibold text-xs rounded-xl shadow-md hover:bg-rose-700 transition"
         >
           <Plus className="w-4 h-4" />
-          <span>{t.addExpense.split(' ')[0] + ' ' + t.addExpense.split(' ')[1]}</span>
+          <span>{t.addExpense}</span>
         </button>
       </div>
 
       {/* Analytics Breakdown & Records List */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Pie Category Chart */}
-        <div className="lg:col-span-6 glass-panel p-6 rounded-3xl space-y-4 glow-rose">
-          <h2 className="font-bold text-sm tracking-tight text-white font-mono uppercase">{t.categoryBreakdown}</h2>
+        <div className="lg:col-span-6 glass-panel p-6 rounded-3xl space-y-4">
+          <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">{t.categoryBreakdown}</h2>
           
           {pieData.length > 0 ? (
             <div className="h-64 flex flex-col justify-center items-center">
@@ -95,39 +95,39 @@ export default function ExpensePage() {
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value) => value ? `₨ ${Number(value).toLocaleString()}` : ''} contentStyle={{ background: '#111827', borderColor: 'rgba(255,255,255,0.1)', fontSize: 10 }} />
+                  <Tooltip formatter={(value) => value ? `₨ ${Number(value).toLocaleString()}` : ''} contentStyle={{ background: '#FFFFFF', borderColor: '#E2E8F0', fontSize: 11, borderRadius: 8 }} />
                 </PieChart>
               </ResponsiveContainer>
               
               {/* Custom Legend */}
-              <div className="flex flex-wrap justify-center gap-3 text-[10px] px-2 font-mono">
+              <div className="flex flex-wrap justify-center gap-3 text-[11px] px-2 font-semibold">
                 {pieData.map((item, idx) => (
                   <div key={idx} className="flex items-center space-x-1.5">
                     <span className="w-2.5 h-2.5 rounded" style={{ backgroundColor: item.color }}></span>
-                    <span className="text-slate-400">{item.name}</span>
+                    <span className="text-slate-600 dark:text-slate-400">{item.name}</span>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <p className="text-xs text-slate-400 text-center py-10">Add expense records to compile breakdowns.</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 text-center py-10">Add expense records to compile breakdowns.</p>
           )}
         </div>
 
         {/* Expenses Table */}
         <div className="lg:col-span-6 glass-panel p-6 rounded-3xl space-y-4">
-          <h2 className="font-bold text-sm tracking-tight text-white font-mono uppercase">Transaction History</h2>
+          <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">Transaction History</h2>
 
           <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
             {expenseRecords.map((rec) => (
-              <div key={rec.id} className="flex justify-between items-center p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors">
+              <div key={rec.id} className="flex justify-between items-center p-3.5 rounded-2xl bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200/80 dark:border-white/5 transition-colors">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400">
+                  <div className="w-8 h-8 rounded-lg bg-rose-100 dark:bg-rose-500/10 flex items-center justify-center text-rose-600 dark:text-rose-400">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                   <div className="space-y-0.5">
-                    <div className="text-xs font-semibold text-slate-200">{rec.category}</div>
-                    <div className="flex items-center space-x-1.5 text-[9px] text-slate-500 font-mono">
+                    <div className="text-xs font-semibold text-slate-800 dark:text-slate-200">{rec.category}</div>
+                    <div className="flex items-center space-x-1.5 text-[10px] text-slate-500 dark:text-slate-400">
                       <Calendar className="w-3 h-3" />
                       <span>{rec.date}</span>
                     </div>
@@ -135,10 +135,10 @@ export default function ExpensePage() {
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <span className="text-xs font-bold font-mono text-white">₨ {rec.amount.toLocaleString()}</span>
+                  <span className="text-xs font-bold text-slate-900 dark:text-white">₨ {rec.amount.toLocaleString()}</span>
                   <button
                     onClick={() => deleteExpense(rec.id)}
-                    className="text-slate-500 hover:text-[#FF6B6B] transition"
+                    className="text-slate-400 hover:text-rose-600 transition"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -155,22 +155,22 @@ export default function ExpensePage() {
 
       {/* Add Expense Overlay Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0A0E1A]/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md glass-panel p-6 rounded-3xl glow-rose space-y-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-white/10 p-6 rounded-3xl space-y-4 shadow-xl">
             <div className="flex justify-between items-center">
-              <h3 className="font-bold text-base text-white">{t.addExpense}</h3>
-              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-white transition">
+              <h3 className="font-bold text-base text-slate-900 dark:text-white">{t.addExpense}</h3>
+              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.category}</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">{t.category}</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-[#111827] border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-rose-400"
+                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500"
                 >
                   {categoriesList.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>

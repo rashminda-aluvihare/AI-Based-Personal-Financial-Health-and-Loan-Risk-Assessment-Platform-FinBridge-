@@ -67,44 +67,44 @@ export default function GoalsPage() {
 
               <div className="flex justify-between items-start">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center text-cyan-400">
+                  <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-cyan-400/10 flex items-center justify-center text-blue-600 dark:text-cyan-400">
                     <Target className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-slate-200">{goal.name}</h3>
-                    <p className="text-[10px] text-slate-500 font-mono">Until {goal.targetDate}</p>
+                    <h3 className="font-bold text-sm text-slate-900 dark:text-slate-200">{goal.name}</h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Until {goal.targetDate}</p>
                   </div>
                 </div>
 
                 <button
                   onClick={() => deleteGoal(goal.id)}
-                  className="text-slate-500 hover:text-[#FF6B6B] transition p-1"
+                  className="text-slate-400 hover:text-rose-500 transition p-1"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Targets detail */}
-              <div className="grid grid-cols-2 gap-4 text-xs font-mono">
+              <div className="grid grid-cols-2 gap-4 text-xs font-semibold">
                 <div className="space-y-0.5">
-                  <span className="text-[9px] text-slate-500 uppercase">Target Amount</span>
-                  <p className="text-xs font-bold text-white">₨ {goal.targetAmount.toLocaleString()}</p>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Target Amount</span>
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">₨ {goal.targetAmount.toLocaleString()}</p>
                 </div>
                 <div className="space-y-0.5 text-right">
-                  <span className="text-[9px] text-slate-500 uppercase">Saved Balance</span>
-                  <p className="text-xs font-bold text-[#00D4AA]">₨ {goal.currentAmount.toLocaleString()}</p>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Saved Balance</span>
+                  <p className="text-xs font-bold text-emerald-600 dark:text-[#00D4AA]">₨ {goal.currentAmount.toLocaleString()}</p>
                 </div>
               </div>
 
               {/* Progress Slider Bar */}
               <div className="space-y-2">
-                <div className="flex justify-between text-[10px] font-mono">
-                  <span className="text-slate-400">Completion</span>
-                  <span className="text-cyan-400 font-bold">{progress}%</span>
+                <div className="flex justify-between text-[11px] font-semibold">
+                  <span className="text-slate-600 dark:text-slate-400">Completion</span>
+                  <span className="text-blue-600 dark:text-cyan-400 font-bold">{progress}%</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-white/5 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-[#6C63FF] to-cyan-400 rounded-full transition-all duration-500"
+                    className="h-full bg-blue-600 dark:bg-gradient-to-r dark:from-[#6C63FF] dark:to-cyan-400 rounded-full transition-all duration-500"
                     style={{ width: `${Math.min(100, progress)}%` }}
                   ></div>
                 </div>
@@ -114,14 +114,14 @@ export default function GoalsPage() {
               <div className="flex space-x-2">
                 <button
                   onClick={() => updateGoalAmount(goal.id, 5000)}
-                  className="flex-1 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/40 text-[10px] font-mono text-slate-300 hover:text-white flex items-center justify-center space-x-1.5 transition-colors bg-white/5"
+                  className="flex-1 py-2 rounded-xl border border-slate-200 dark:border-white/10 hover:border-blue-400 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center space-x-1.5 transition-colors bg-slate-50 dark:bg-white/5"
                 >
                   <PiggyBank className="w-3.5 h-3.5" />
                   <span>Deposit Rs 5,000</span>
                 </button>
                 <button
                   onClick={() => updateGoalAmount(goal.id, 25000)}
-                  className="flex-1 py-1.5 rounded-xl border border-white/10 hover:border-cyan-400/40 text-[10px] font-mono text-slate-300 hover:text-white flex items-center justify-center space-x-1.5 transition-colors bg-white/5"
+                  className="flex-1 py-2 rounded-xl border border-slate-200 dark:border-white/10 hover:border-blue-400 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center space-x-1.5 transition-colors bg-slate-50 dark:bg-white/5"
                 >
                   <TrendingUp className="w-3.5 h-3.5" />
                   <span>Deposit Rs 25,000</span>
@@ -132,7 +132,7 @@ export default function GoalsPage() {
         })}
 
         {goals.length === 0 && (
-          <div className="md:col-span-2 text-center py-20 text-slate-500 text-xs font-mono">
+          <div className="md:col-span-2 text-center py-20 text-slate-500 text-xs font-medium">
             No active savings goals found. Create one now to begin tracking.
           </div>
         )}

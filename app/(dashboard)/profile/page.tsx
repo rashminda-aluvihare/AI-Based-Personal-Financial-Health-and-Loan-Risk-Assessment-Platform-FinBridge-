@@ -55,25 +55,25 @@ export default function ProfilePage() {
           </div>
 
           <div className="space-y-1">
-            <h3 className="font-extrabold text-white text-base font-display">{userName}</h3>
-            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#00D4AA]/25 text-[#00D4AA] border border-[#00D4AA]/20 uppercase">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">{userName}</h3>
+            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-[#00D4AA]/25 text-blue-700 dark:text-[#00D4AA] uppercase">
               {role}
             </span>
           </div>
 
-          <div className="w-full h-[1px] bg-white/5 my-2"></div>
+          <div className="w-full h-[1px] bg-slate-200 dark:bg-white/5 my-2"></div>
 
-          <div className="w-full space-y-2 text-xs text-slate-400 text-left">
+          <div className="w-full space-y-2 text-xs text-slate-600 dark:text-slate-400 text-left font-medium">
             <div className="flex items-center space-x-2">
-              <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
+              <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
               <span>{location}</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Phone className="w-4 h-4 text-slate-500 shrink-0" />
+              <Phone className="w-4 h-4 text-slate-400 shrink-0" />
               <span>{userPhone}</span>
             </div>
             <div className="flex items-center space-x-2">
-              <FileText className="w-4 h-4 text-slate-500 shrink-0" />
+              <FileText className="w-4 h-4 text-slate-400 shrink-0" />
               <span>NIC: {nic}</span>
             </div>
           </div>
@@ -81,10 +81,10 @@ export default function ProfilePage() {
 
         {/* Right Form settings */}
         <div className="md:col-span-2 glass-panel p-6 rounded-3xl space-y-6">
-          <h2 className="font-bold text-sm tracking-tight text-white font-mono uppercase">Profile parameters</h2>
+          <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">Profile Parameters</h2>
 
           {showSaved && (
-            <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-[#00D4AA] text-xs rounded-xl flex items-center space-x-2">
+            <div className="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-[#00D4AA] text-xs rounded-xl flex items-center space-x-2 font-medium">
               <CheckCircle2 className="w-4 h-4" />
               <span>Settings saved successfully!</span>
             </div>
@@ -93,51 +93,51 @@ export default function ProfilePage() {
           <form onSubmit={handleSave} className="space-y-4 text-xs">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">Full Name</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">Full Name</label>
                 <input
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-[#6C63FF]"
+                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-600"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">Mobile Phone</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">Mobile Phone</label>
                 <input
                   type="text"
                   value={userPhone}
                   onChange={(e) => setUserPhone(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-[#6C63FF]"
+                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-600"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">Location Region</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">Location Region</label>
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-[#6C63FF]"
+                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-600"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">National NIC ID</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">National NIC ID</label>
                 <input
                   type="text"
                   value={nic}
                   onChange={(e) => setNic(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-[#6C63FF]"
+                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-600"
                 />
               </div>
             </div>
 
             {/* Language settings */}
-            <div className="space-y-1.5 pt-4 border-t border-white/5">
-              <label className="text-[10px] font-mono text-slate-500 uppercase block">Preferred Localization language</label>
+            <div className="space-y-1.5 pt-4 border-t border-slate-200 dark:border-white/5">
+              <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">Preferred Localization language</label>
               <div className="flex gap-2">
                 {[
                   { code: 'en', label: 'English' },
