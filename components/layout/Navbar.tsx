@@ -99,50 +99,18 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* User Role Selector Dropdown */}
-        <div className="relative">
-          <button 
-            onClick={() => { setRoleOpen(!roleOpen); setLangOpen(false); }}
-            className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#6C63FF]/10 to-[#00D4AA]/10 hover:from-[#6C63FF]/20 hover:to-[#00D4AA]/20 border border-[#6C63FF]/30 transition text-sm text-slate-200 font-medium"
-          >
-            {role === 'admin' ? (
-              <Shield className="w-4 h-4 text-[#FF6B6B]" />
-            ) : role === 'lender' ? (
-              <Briefcase className="w-4 h-4 text-[#00D4AA]" />
-            ) : (
-              <User className="w-4 h-4 text-[#6C63FF]" />
-            )}
-            <span className="hidden sm:inline">{roleLabels[role]}</span>
-            <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-          </button>
-          
-          {roleOpen && (
-            <div className="absolute right-0 mt-2 w-52 rounded-xl border border-white/10 bg-[#111827] shadow-xl overflow-hidden z-50">
-              <div className="px-4 py-2 text-[10px] font-mono text-slate-500 uppercase tracking-widest border-b border-white/5">
-                {t.roleSelection}
-              </div>
-              <button 
-                onClick={() => { setRole('borrower'); setRoleOpen(false); }}
-                className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/5 transition flex items-center space-x-2 ${role === 'borrower' ? 'text-[#6C63FF] font-semibold' : 'text-slate-300'}`}
-              >
-                <User className="w-4 h-4" />
-                <span>{t.borrower}</span>
-              </button>
-              <button 
-                onClick={() => { setRole('lender'); setRoleOpen(false); }}
-                className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/5 transition flex items-center space-x-2 ${role === 'lender' ? 'text-[#00D4AA] font-semibold' : 'text-slate-300'}`}
-              >
-                <Briefcase className="w-4 h-4" />
-                <span>{t.lender}</span>
-              </button>
-              <button 
-                onClick={() => { setRole('admin'); setRoleOpen(false); }}
-                className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/5 transition flex items-center space-x-2 ${role === 'admin' ? 'text-[#FF6B6B] font-semibold' : 'text-slate-300'}`}
-              >
-                <Shield className="w-4 h-4" />
-                <span>{t.admin}</span>
-              </button>
-            </div>
+        {/* User Role Badge */}
+        <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#6C63FF]/10 to-[#00D4AA]/10 border border-[#6C63FF]/20 text-xs font-mono text-slate-200">
+          {role === 'admin' ? (
+            <>
+              <Shield className="w-3.5 h-3.5 text-[#FF6B6B]" />
+              <span className="font-bold text-[#FF6B6B]">Admin</span>
+            </>
+          ) : (
+            <>
+              <User className="w-3.5 h-3.5 text-[#6C63FF]" />
+              <span className="font-semibold text-slate-300">User</span>
+            </>
           )}
         </div>
 

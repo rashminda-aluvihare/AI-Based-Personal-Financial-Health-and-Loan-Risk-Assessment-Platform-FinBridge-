@@ -52,53 +52,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Role Quick Selector */}
-        <div className="space-y-2">
-          <label className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">
-            {t.roleSelection}
-          </label>
-          <div className="grid grid-cols-3 gap-2">
-            <button
-              type="button"
-              onClick={() => setRole('borrower')}
-              className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition text-center ${
-                role === 'borrower'
-                  ? 'border-[#6C63FF] bg-[#6C63FF]/15 text-white font-semibold'
-                  : 'border-white/5 bg-white/5 text-slate-400 hover:text-white'
-              }`}
-            >
-              <User className="w-4 h-4 text-[#6C63FF]" />
-              <span className="text-[10px]">{t.borrower}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setRole('lender')}
-              className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition text-center ${
-                role === 'lender'
-                  ? 'border-[#00D4AA] bg-[#00D4AA]/15 text-white font-semibold'
-                  : 'border-white/5 bg-white/5 text-slate-400 hover:text-white'
-              }`}
-            >
-              <Briefcase className="w-4 h-4 text-[#00D4AA]" />
-              <span className="text-[10px]">{t.lender.split('/')[0]}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setRole('admin')}
-              className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition text-center ${
-                role === 'admin'
-                  ? 'border-[#FF6B6B] bg-[#FF6B6B]/15 text-white font-semibold'
-                  : 'border-white/5 bg-white/5 text-slate-400 hover:text-white'
-              }`}
-            >
-              <Shield className="w-4 h-4 text-[#FF6B6B]" />
-              <span className="text-[10px]">Admin</span>
-            </button>
-          </div>
-        </div>
-
         {/* Login Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-1.5">
