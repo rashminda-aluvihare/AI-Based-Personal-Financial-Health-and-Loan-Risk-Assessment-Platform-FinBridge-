@@ -16,7 +16,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const themeClass = theme === 'light' ? 'theme-light text-[#0F172A]' : theme === 'dim' ? 'theme-dim text-[#F1F5F9]' : 'theme-dark text-slate-100';
 
   // Public pages without dashboard shell
-  const isPublicPage = pathname === '/' || pathname.startsWith('/auth');
+  const isPublicPage = pathname === '/' || pathname === '/login' || pathname === '/register' || pathname.startsWith('/auth');
 
   if (isPublicPage) {
     return (

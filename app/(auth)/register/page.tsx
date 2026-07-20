@@ -173,7 +173,7 @@ export default function RegisterPage() {
 
         <div className="text-center text-xs text-slate-400">
           <span>{language === 'si' ? "දැනටමත් ගිණුමක් තිබේද?" : language === 'ta' ? "ஏற்கனவே கணக்கு உள்ளதா?" : "Already have an account?"} </span>
-          <Link href="/auth/login" className="text-[#00D4AA] hover:underline font-semibold">
+          <Link href="/login" className="text-[#00D4AA] hover:underline font-semibold">
             {t.login}
           </Link>
         </div>

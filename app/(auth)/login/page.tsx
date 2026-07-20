@@ -144,7 +144,7 @@ export default function LoginPage() {
 
         <div className="text-center text-xs text-slate-400">
           <span>{language === 'si' ? "ගිණුමක් නොමැතිද?" : language === 'ta' ? "கணக்கு இல்லையா?" : "Don't have an account?"} </span>
-          <Link href="/auth/register" className="text-[#00D4AA] hover:underline font-semibold">
+          <Link href="/register" className="text-[#00D4AA] hover:underline font-semibold">
             {t.register}
           </Link>
         </div>

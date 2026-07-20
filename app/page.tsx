@@ -108,14 +108,14 @@ export default function LandingPage() {
         {/* CTAs */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
           <Link 
-            href="/auth/login"
+            href="/login"
             className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#00D4AA] hover:opacity-95 text-white font-semibold rounded-xl flex items-center justify-center space-x-2 transition shadow-lg shadow-[#6C63FF]/25 group"
           >
             <span>{t.getStarted}</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link 
-            href="/auth/register"
+            href="/register"
             className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl flex items-center justify-center transition"
           >
             <span>{t.register}</span>
