@@ -95,7 +95,7 @@ export default function ExpensePage() {
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value) => `₨ ${value.toLocaleString()}`} contentStyle={{ background: '#111827', borderColor: 'rgba(255,255,255,0.1)', fontSize: 10 }} />
+                  <Tooltip formatter={(value) => value ? `₨ ${Number(value).toLocaleString()}` : ''} contentStyle={{ background: '#111827', borderColor: 'rgba(255,255,255,0.1)', fontSize: 10 }} />
                 </PieChart>
               </ResponsiveContainer>
               

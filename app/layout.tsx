@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased dark`}>
-      <body className="h-full bg-[#0A0E1A] font-sans">
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}>
+      <body className="h-full font-sans">
         <AppLayout>{children}</AppLayout>
       </body>
     </html>

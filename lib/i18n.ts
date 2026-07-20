@@ -72,7 +72,20 @@ export const translations = {
     // Admin
     userStats: "User & System Statistics",
     usersList: "Registered System Users",
-    scoresDistribution: "Financial Scores Distribution"
+    scoresDistribution: "Financial Scores Distribution",
+
+    // Chatbot
+    chatIntro: "Hello! I am your FinBridge AI Assistant. Ask me anything about your credit score, savings goals, or monthly budget.",
+    chatWithAI: "Chat with FinBridge AI",
+    chatPlaceholder: "Ask AI about your financial health...",
+    
+    // Lender
+    lenderPanel: "Lender Dashboard",
+    deployedCapital: "Deployed Capital",
+    netReturns: "Projected Net Returns",
+    nplRatio: "NPL (Non-Performing Loan) Ratio",
+    autoInvest: "Automated Lending Configuration",
+    borrowerProfiles: "Underwritten Borrower Profiles"
   },
   si: {
     brand: "FinBridge",
@@ -145,7 +158,20 @@ export const translations = {
     // Admin
     userStats: "පරිශීලක සහ පද්ධති සංඛ්‍යාලේඛන",
     usersList: "ලියාපදිංචි පරිශීලකයින්",
-    scoresDistribution: "මූල්‍ය ලකුණු ව්‍යාප්තිය"
+    scoresDistribution: "මූල්‍ය ලකුණු ව්‍යාප්තිය",
+
+    // Chatbot
+    chatIntro: "ආයුබෝවන්! මම ඔබගේ FinBridge AI සහායකයා. ඔබගේ ණය ලකුණු, ඉතුරුම් ඉලක්ක හෝ මාසික අයවැය පිළිබඳව ඕනෑම දෙයක් විමසන්න.",
+    chatWithAI: "FinBridge AI සමඟ සාකච්ඡා කරන්න",
+    chatPlaceholder: "ඔබගේ මූල්‍ය සෞඛ්‍යය පිළිබඳව AI ගෙන් විමසන්න...",
+    
+    // Lender
+    lenderPanel: "ණය දෙන්නන්ගේ පාලක පුවරුව",
+    deployedCapital: "යොදවන ලද මුළු ප්‍රාග්ධනය",
+    netReturns: "අපේක්ෂිත ශුද්ධ ප්‍රතිලාභ",
+    nplRatio: "අකර්මන්‍ය ණය (NPL) අනුපාතය",
+    autoInvest: "ස්වයංක්‍රීය ණය සැකසුම්",
+    borrowerProfiles: "තක්සේරු කරන ලද ණයහිමි පැතිකඩයන්"
   },
   ta: {
     brand: "FinBridge",
@@ -218,6 +244,19 @@ export const translations = {
     // Admin
     userStats: "பயனர் மற்றும் கணினி புள்ளிவிவரங்கள்",
     usersList: "பதிவுசெய்யப்பட்ட பயனர்கள்",
-    scoresDistribution: "நிதி மதிப்பெண் விநியோகம்"
+    scoresDistribution: "நிதி மதிப்பெண் விநியோகம்",
+
+    // Chatbot
+    chatIntro: "வணக்கம்! நான் உங்கள் FinBridge AI உதவியாளர். உங்கள் கடன் மதிப்பெண், சேமிப்பு இலக்குகள் அல்லது மாதாந்திர வரவு செலவு திட்டம் பற்றி ஏதேனும் கேட்கலாம்.",
+    chatWithAI: "FinBridge AI உடன் உரையாடுங்கள்",
+    chatPlaceholder: "உங்கள் நிதி ஆரோக்கியம் பற்றி AI இடம் கேளுங்கள்...",
+    
+    // Lender
+    lenderPanel: "கடன் வழங்குநர் டாஷ்போர்டு",
+    deployedCapital: "முதலீடு செய்யப்பட்ட மூலதனம்",
+    netReturns: "எதிர்பார்க்கப்படும் நிகர லாபம்",
+    nplRatio: "செலுத்தப்படாத கடன் (NPL) விகிதம்",
+    autoInvest: "தானியங்கி கடன் உள்ளமைவு",
+    borrowerProfiles: "மதிப்பிடப்பட்ட கடன் வாங்குபவர் சுயவிவரங்கள்"
   }
 };

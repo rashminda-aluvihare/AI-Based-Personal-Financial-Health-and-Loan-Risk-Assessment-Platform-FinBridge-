@@ -16,8 +16,11 @@ import {
 import { ResponsiveContainer, AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
 export default function LenderPage() {
-  const { language, walletBalance } = useAppStore();
+  const { language } = useAppStore();
   const t = translations[language];
+
+  // Local simulated wallet balance for testing funding functionality
+  const [walletBalance, setWalletBalance] = useState(1500000);
 
   // Auto-invest settings states
   const [autoInvestActive, setAutoInvestActive] = useState(false);
@@ -48,6 +51,7 @@ export default function LenderPage() {
     // Simulate funding
     setFundedLoans(prev => [...prev, id]);
     setPortfolioBalance(prev => prev + amt);
+    setWalletBalance(prev => prev - amt);
   };
 
   const getRiskColor = (risk: string) => {
