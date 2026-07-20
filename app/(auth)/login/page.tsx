@@ -12,17 +12,20 @@ export default function LoginPage() {
   const { language, role, setRole, user } = useAppStore();
   const t = translations[language];
 
-  const [email, setEmail] = useState('rashminda@finbridge.lk');
-  const [password, setPassword] = useState('********');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login and redirect
-    if (role === 'admin') {
-      router.push('/admin');
+    
+    // Auto-detect admin credentials or active role selection
+    if (email.trim().toLowerCase() === 'rashmindaaluvihare447@gmail.com' || role === 'admin') {
+      setRole('admin');
+      router.push('/dashboard');
     } else if (role === 'lender') {
-      router.push('/lender');
+      router.push('/dashboard');
     } else {
+      setRole('borrower');
       router.push('/dashboard');
     }
   };
