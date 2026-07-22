@@ -57,6 +57,7 @@ interface AppState {
   setLanguage: (lang: Language) => void;
   setRole: (role: 'borrower' | 'lender' | 'admin') => void;
   setTheme: (theme: 'dark' | 'dim' | 'light') => void;
+  setFinancialScore: (score: number) => void;
   
   // CRUD Actions
   addIncome: (rec: Omit<IncomeRecord, 'id'>) => void;
@@ -116,6 +117,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   setLanguage: (lang) => set({ language: lang }),
   setRole: (role) => set({ role: role }),
   setTheme: (theme) => set({ theme: theme }),
+  setFinancialScore: (score) => set({ financialScore: score }),
 
   addIncome: (rec) => {
     const newRec = { ...rec, id: `inc-${Date.now()}` };

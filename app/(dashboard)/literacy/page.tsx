@@ -5,8 +5,8 @@ import { useAppStore } from '@/lib/store';
 import { translations } from '@/lib/i18n';
 import { BookOpen, HelpCircle, CheckCircle, AlertCircle, ArrowRight, Award } from 'lucide-react';
 
-export default function LiteracyHub() {
-  const { language } = useAppStore();
+export default function LiteracyPage() {
+  const { language, financialScore, setFinancialScore } = useAppStore();
   const t = translations[language];
 
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -43,10 +43,10 @@ export default function LiteracyHub() {
       question: "What is the recommended maximum percentage of income to allocate to debt payments (DTI)?",
       options: ["20% - 35%", "50% - 60%", "70% - 80%", "None of the above"],
       correct: "20% - 35%",
-      explanation: "Lenders look for a Debt-to-Income ratio between 20% and 35% as a benchmark. Ratios above 45% represent extreme financial stress."
+      explanation: "A Debt-to-Income ratio below 36% indicates manageable debt levels and lower financial stress."
     },
     {
-      question: "Which type of asset buffer represents the most liquid safety net for families?",
+      question: "Which type of asset is considered most liquid for emergencies?",
       options: ["Real Estate", "Emergency cash & savings accounts", "Long-term treasury bonds", "Cryptocurrency investments"],
       correct: "Emergency cash & savings accounts",
       explanation: "Emergency cash can be withdrawn instantly without penalties or market risks, making it the supreme choice for unexpected incidents."
@@ -70,7 +70,9 @@ export default function LiteracyHub() {
     if (!selectedOption || isAnswered) return;
 
     if (selectedOption === currentQuiz.correct) {
-      setScore(score + 1);
+      setScore(prev => prev + 1);
+      // Award +10 points to platform Financial Score (max 100)
+      setFinancialScore(Math.min(100, financialScore + 10));
     }
     setIsAnswered(true);
   };
@@ -85,48 +87,46 @@ export default function LiteracyHub() {
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-black text-white font-display tracking-tight">{t.literacyHub}</h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Expand your budgeting literacy, read curated local guides, and test your financial knowledge.
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{t.literacyHub}</h1>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          Expand your budgeting literacy, read curated local guides, and test your financial knowledge to boost your AI Score (+10 pts per quiz).
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Quiz Game Column */}
-        <div className="lg:col-span-7 glass-panel p-6 rounded-3xl space-y-5 glow-teal">
-          <div className="flex justify-between items-center border-b border-white/10 pb-4">
-            <div className="flex items-center space-x-2 text-white font-semibold text-sm">
-              <HelpCircle className="w-5 h-5 text-[#00D4AA]" />
+        <div className="lg:col-span-7 glass-panel p-6 rounded-3xl space-y-5">
+          <div className="flex justify-between items-center border-b border-slate-200 dark:border-white/10 pb-4">
+            <div className="flex items-center space-x-2 text-slate-900 dark:text-white font-bold text-sm">
+              <HelpCircle className="w-5 h-5 text-blue-600 dark:text-[#00D4AA]" />
               <span>{t.quizTitle}</span>
             </div>
-            <div className="flex items-center space-x-1.5 text-xs font-mono font-bold text-slate-400">
-              <Award className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center space-x-1.5 text-xs font-bold text-slate-600 dark:text-slate-300">
+              <Award className="w-4 h-4 text-amber-500" />
               <span>Score: {score} / {quizQuestions.length}</span>
             </div>
           </div>
 
           {/* Question Text */}
           <div className="space-y-2">
-            <span className="text-[10px] text-[#00D4AA] font-mono uppercase font-bold">Question {activeQuestion + 1} of {quizQuestions.length}</span>
-            <p className="text-sm font-semibold text-slate-200 leading-relaxed">{currentQuiz.question}</p>
+            <span className="text-[10px] text-blue-600 dark:text-[#00D4AA] uppercase font-bold tracking-wider">Question {activeQuestion + 1} of {quizQuestions.length}</span>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 leading-snug">{currentQuiz.question}</h3>
           </div>
 
-          {/* Options Grid */}
-          <div className="space-y-2">
+          {/* Option list */}
+          <div className="space-y-2.5">
             {currentQuiz.options.map((opt) => {
-              const isSelected = selectedOption === opt;
-              const isCorrect = opt === currentQuiz.correct;
-              
-              let btnClass = "border-white/10 text-slate-300 hover:bg-white/5";
-              if (isSelected) btnClass = "border-[#6C63FF]/50 bg-[#6C63FF]/10 text-white";
-              
+              let btnClass = "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-blue-500 dark:hover:border-[#6C63FF]/50";
+
+              if (selectedOption === opt) {
+                btnClass = "bg-blue-50 dark:bg-[#6C63FF]/20 border-blue-500 dark:border-[#6C63FF] text-blue-700 dark:text-white font-semibold";
+              }
+
               if (isAnswered) {
-                if (isCorrect) {
-                  btnClass = "border-emerald-500/50 bg-emerald-500/10 text-emerald-400";
-                } else if (isSelected) {
-                  btnClass = "border-rose-500/50 bg-rose-500/10 text-rose-400";
-                } else {
-                  btnClass = "border-white/5 text-slate-500 opacity-60";
+                if (opt === currentQuiz.correct) {
+                  btnClass = "bg-emerald-50 dark:bg-emerald-500/20 border-emerald-500 text-emerald-700 dark:text-emerald-300 font-bold";
+                } else if (selectedOption === opt) {
+                  btnClass = "bg-rose-50 dark:bg-rose-500/20 border-rose-500 text-rose-700 dark:text-rose-300 font-semibold";
                 }
               }
 
@@ -135,7 +135,7 @@ export default function LiteracyHub() {
                   key={opt}
                   disabled={isAnswered}
                   onClick={() => handleOptionClick(opt)}
-                  className={`w-full text-left p-3 rounded-xl border text-xs font-mono transition-all duration-200 ${btnClass}`}
+                  className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold transition-all duration-200 ${btnClass}`}
                 >
                   {opt}
                 </button>
@@ -149,27 +149,27 @@ export default function LiteracyHub() {
               <button
                 disabled={!selectedOption}
                 onClick={handleAnswerSubmit}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#6C63FF] to-[#00D4AA] text-white font-semibold text-xs disabled:opacity-50 disabled:pointer-events-none hover:scale-101 transition-transform"
+                className="w-full py-3 rounded-xl bg-blue-600 dark:bg-gradient-to-r dark:from-[#6C63FF] dark:to-[#00D4AA] text-white font-semibold text-xs disabled:opacity-50 disabled:pointer-events-none hover:bg-blue-700 transition"
               >
-                Submit Answer
+                Submit Answer (+10 Score Points)
               </button>
             ) : (
               <div className="space-y-4">
                 {/* Explanation Card */}
-                <div className={`p-4 rounded-2xl border text-[11px] leading-relaxed font-mono ${
+                <div className={`p-4 rounded-2xl border text-xs leading-relaxed font-medium ${
                   selectedOption === currentQuiz.correct 
-                    ? 'bg-emerald-500/5 border-emerald-500/10 text-emerald-300' 
-                    : 'bg-rose-500/5 border-rose-500/10 text-rose-300'
+                    ? 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20 text-emerald-800 dark:text-emerald-300' 
+                    : 'bg-rose-50 dark:bg-rose-500/10 border-rose-200 dark:border-rose-500/20 text-rose-800 dark:text-rose-300'
                 }`}>
                   <div className="flex items-center space-x-1.5 font-bold mb-1">
                     {selectedOption === currentQuiz.correct ? (
                       <>
-                        <CheckCircle className="w-4 h-4 text-emerald-400" />
-                        <span>{t.correct}</span>
+                        <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                        <span>{t.correct} (+10 AI Score Bonus)</span>
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="w-4 h-4 text-rose-400" />
+                        <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                         <span>{t.incorrect}</span>
                       </>
                     )}
@@ -179,7 +179,7 @@ export default function LiteracyHub() {
 
                 <button
                   onClick={handleNext}
-                  className="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs flex items-center justify-center space-x-2 border border-white/10 transition"
+                  className="w-full py-3 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-800 dark:text-white font-semibold text-xs flex items-center justify-center space-x-2 border border-slate-200 dark:border-white/10 transition"
                 >
                   <span>Next Question</span>
                   <ArrowRight className="w-4 h-4" />
@@ -191,24 +191,24 @@ export default function LiteracyHub() {
 
         {/* Articles Feed */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="flex items-center space-x-2 text-white font-semibold text-sm">
-            <BookOpen className="w-5 h-5 text-[#6C63FF]" />
+          <div className="flex items-center space-x-2 text-slate-900 dark:text-white font-bold text-sm">
+            <BookOpen className="w-5 h-5 text-blue-600 dark:text-[#6C63FF]" />
             <span>{t.articles}</span>
           </div>
 
           <div className="space-y-4">
             {articles.map((art) => (
-              <div key={art.id} className="glass-panel p-5 rounded-3xl space-y-2 border border-white/5 hover:border-[#6C63FF]/30 transition-all duration-200">
+              <div key={art.id} className="glass-panel p-5 rounded-3xl space-y-2 border border-slate-200/80 dark:border-white/5 hover:border-blue-400 dark:hover:border-[#6C63FF]/30 transition-all duration-200">
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] px-2 py-0.5 rounded-full font-mono bg-[#6C63FF]/10 text-[#6C63FF] border border-[#6C63FF]/20">
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-blue-50 dark:bg-[#6C63FF]/10 text-blue-600 dark:text-[#6C63FF]">
                     {art.category}
                   </span>
-                  <span className="text-[9px] text-slate-500 font-mono">{art.duration}</span>
+                  <span className="text-[10px] text-slate-500 font-semibold">{art.duration}</span>
                 </div>
-                <h3 className="font-bold text-xs text-slate-200 hover:text-white transition-colors cursor-pointer">
+                <h3 className="font-bold text-xs text-slate-900 dark:text-slate-200 hover:text-blue-600 transition-colors cursor-pointer">
                   {art.title}
                 </h3>
-                <p className="text-[10px] text-slate-400 leading-relaxed font-sans">
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
                   {art.summary}
                 </p>
               </div>

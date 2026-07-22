@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { useAppStore } from '@/lib/store';
 import { translations } from '@/lib/i18n';
-import { Plus, Trash2, Calendar, DollarSign, ArrowDownLeft, X } from 'lucide-react';
+import { Plus, Trash2, Calendar, ArrowDownLeft, X, Download } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts';
+import { exportToCSV } from '@/lib/export';
 
 export default function IncomePage() {
   const { language, incomeRecords, addIncome, deleteIncome } = useAppStore();
@@ -89,7 +90,18 @@ export default function IncomePage() {
 
         {/* Records Listing */}
         <div className="lg:col-span-5 glass-panel p-6 rounded-3xl space-y-4">
-          <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">Logged Cash Flows</h2>
+          <div className="flex justify-between items-center">
+            <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">Logged Cash Flows</h2>
+            {incomeRecords.length > 0 && (
+              <button
+                onClick={() => exportToCSV(incomeRecords, 'finbridge-income-report.csv')}
+                className="flex items-center space-x-1 text-[11px] font-semibold text-blue-600 dark:text-[#00D4AA] hover:underline"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Export CSV</span>
+              </button>
+            )}
+          </div>
           
           <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
             {incomeRecords.map((rec) => (

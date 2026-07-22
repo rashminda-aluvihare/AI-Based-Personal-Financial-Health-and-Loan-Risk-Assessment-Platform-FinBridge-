@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { useAppStore } from '@/lib/store';
 import { translations } from '@/lib/i18n';
-import { Plus, Trash2, Calendar, ShoppingBag, ArrowUpRight, X } from 'lucide-react';
+import { Plus, Trash2, Calendar, ShoppingBag, ArrowUpRight, X, Download } from 'lucide-react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { exportToCSV } from '@/lib/export';
 
 export default function ExpensePage() {
   const { language, expenseRecords, addExpense, deleteExpense } = useAppStore();
@@ -116,7 +117,18 @@ export default function ExpensePage() {
 
         {/* Expenses Table */}
         <div className="lg:col-span-6 glass-panel p-6 rounded-3xl space-y-4">
-          <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">Transaction History</h2>
+          <div className="flex justify-between items-center">
+            <h2 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white uppercase">Transaction History</h2>
+            {expenseRecords.length > 0 && (
+              <button
+                onClick={() => exportToCSV(expenseRecords, 'finbridge-expense-report.csv')}
+                className="flex items-center space-x-1 text-[11px] font-semibold text-rose-600 dark:text-rose-400 hover:underline"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Export CSV</span>
+              </button>
+            )}
+          </div>
 
           <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
             {expenseRecords.map((rec) => (

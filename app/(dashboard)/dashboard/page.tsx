@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useAppStore } from '@/lib/store';
 import { translations } from '@/lib/i18n';
 import { 
@@ -16,6 +17,7 @@ import {
   Search, 
   ShieldCheck,
   TrendingDown,
+  ChevronRight,
   BarChart as BarChartIcon
 } from 'lucide-react';
 import { 
@@ -383,14 +385,25 @@ export default function DynamicDashboard() {
           <h3 className="font-bold text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">{t.recommendations}</h3>
           
           <div className="space-y-3">
-            {recommendations.map((rec, idx) => (
-              <div key={idx} className="flex items-start space-x-3 p-3.5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 hover:border-blue-300 dark:hover:border-indigo-500/20 transition-all duration-200">
-                <div className="w-5 h-5 rounded-lg bg-blue-100 dark:bg-[#6C63FF]/10 flex items-center justify-center text-blue-600 dark:text-[#6C63FF] shrink-0 mt-0.5">
-                  <Activity className="w-3.5 h-3.5" />
-                </div>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">{rec}</p>
-              </div>
-            ))}
+            {recommendations.map((rec, idx) => {
+              const href = rec.toLowerCase().includes('loan') || rec.toLowerCase().includes('debt') 
+                ? '/loans' 
+                : rec.toLowerCase().includes('sav') || rec.toLowerCase().includes('goal') 
+                ? '/goals' 
+                : '/expense';
+
+              return (
+                <Link key={idx} href={href} className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 hover:border-blue-400 dark:hover:border-indigo-500/40 hover:bg-blue-50/50 dark:hover:bg-white/10 transition-all duration-200 group">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-5 h-5 rounded-lg bg-blue-100 dark:bg-[#6C63FF]/10 flex items-center justify-center text-blue-600 dark:text-[#6C63FF] shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                      <Activity className="w-3.5 h-3.5" />
+                    </div>
+                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium group-hover:text-blue-600 dark:group-hover:text-white transition-colors">{rec}</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-white shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
