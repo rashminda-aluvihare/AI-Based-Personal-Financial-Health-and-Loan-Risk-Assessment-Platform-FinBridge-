@@ -35,6 +35,36 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enterprise Typography Hierarchy */
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h4, h5, h6, .subheading {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+button, .btn {
+  font-weight: 500;
+}
+
+label {
+  font-weight: 500;
+}
+
+table, td {
+  font-weight: 400;
+}
+
+th {
+  font-weight: 600;
 }
 
 /* Color overrides to keep elements perfectly readable on light background */

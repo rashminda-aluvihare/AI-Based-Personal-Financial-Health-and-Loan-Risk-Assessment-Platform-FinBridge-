@@ -39,7 +39,7 @@ export default function ProfilePage() {
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-black text-white font-display tracking-tight">Settings & Profile</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Settings & Profile</h1>
         <p className="text-xs text-slate-400 mt-1">
           Configure your personal details, language localization, and account parameters.
         </p>

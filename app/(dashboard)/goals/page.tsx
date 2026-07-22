@@ -41,7 +41,7 @@ export default function GoalsPage() {
       {/* Title */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-black text-white font-display tracking-tight">{t.goalPlanner}</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{t.goalPlanner}</h1>
           <p className="text-xs text-slate-400 mt-1">
             Plan, monitor progress, and schedule budgets to achieve your dreams.
           </p>

@@ -95,7 +95,7 @@ export default function LandingPage() {
           <span>{language === 'si' ? "ශ්‍රී ලංකාවේ ප්‍රථම AI ක්ෂුද්‍ර මූල්‍ය පද්ධතිය" : language === 'ta' ? "இலங்கையின் முதல் AI நுண்கடன் தளம்" : "Sri Lanka's 1st AI Micro-Credit Platform"}</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-black font-display text-slate-900 tracking-tight max-w-4xl leading-tight">
+        <h1 className="text-4xl sm:text-6xl font-bold text-slate-900 tracking-tight max-w-4xl leading-tight">
           {t.tagline}
         </h1>
         

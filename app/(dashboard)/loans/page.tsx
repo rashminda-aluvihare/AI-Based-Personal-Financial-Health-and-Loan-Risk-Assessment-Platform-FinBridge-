@@ -64,7 +64,7 @@ export default function LoansPage() {
       {/* Title */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-black text-white font-display tracking-tight">{t.loanTracker}</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{t.loanTracker}</h1>
           <p className="text-xs text-slate-400 mt-1">
             Manually log and verify your active liabilities to determine loan risk thresholds.
           </p>

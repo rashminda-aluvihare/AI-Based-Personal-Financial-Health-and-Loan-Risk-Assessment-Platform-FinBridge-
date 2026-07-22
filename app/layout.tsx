@@ -6,6 +6,7 @@ import AppLayout from "@/components/layout/AppLayout";
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 

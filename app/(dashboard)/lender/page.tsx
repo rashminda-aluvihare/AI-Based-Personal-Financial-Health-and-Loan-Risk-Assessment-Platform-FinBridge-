@@ -68,7 +68,7 @@ export default function LenderPage() {
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-black text-white font-display tracking-tight">{t.lenderPanel}</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{t.lenderPanel}</h1>
         <p className="text-xs text-slate-400 mt-1">
           {language === 'si' 
             ? "ප්‍රජා ණය කළඹ කළමනාකරණය කරන්න, අවදානම් තක්සේරු පිරික්සන්න හෝ ස්වයංක්‍රීය ආයෝජන සකසන්න." 
