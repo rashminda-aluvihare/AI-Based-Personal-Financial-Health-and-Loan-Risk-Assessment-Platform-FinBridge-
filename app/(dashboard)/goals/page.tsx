@@ -138,74 +138,74 @@ export default function GoalsPage() {
         )}
       </div>
 
-      {/* Add Goal Modal */}
+      {/* Add Goal Modal Overlay */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0A0E1A]/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md glass-panel p-6 rounded-3xl glow-teal space-y-4">
-            <div className="flex justify-between items-center">
-              <h3 className="font-bold text-base text-white">{t.addGoal}</h3>
-              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-white transition">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-white/10 p-6 rounded-3xl space-y-5 shadow-2xl">
+            <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-white/10">
+              <h3 className="font-bold text-base text-slate-900 dark:text-white">{t.addGoal}</h3>
+              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition p-1">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.goalName}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.goalName}</label>
                 <select
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#111827] border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white focus:outline-none focus:border-blue-600 transition font-medium"
                 >
                   {goalsOptions.map(opt => (
-                    <option key={opt} value={opt}>{opt}</option>
+                    <option key={opt} value={opt} className="bg-white text-slate-900 dark:bg-[#1E293B] dark:text-white">{opt}</option>
                   ))}
                 </select>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.target}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.target}</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-2.5 text-slate-400 font-mono text-[10px]">₨</span>
+                  <span className="absolute left-3.5 top-2.5 text-slate-400 text-xs font-semibold">₨</span>
                   <input
                     type="number"
                     required
                     placeholder="e.g. 500000"
                     value={targetAmount}
                     onChange={(e) => setTargetAmount(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-2 pl-8 pr-4 text-white focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 pl-8 pr-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-600 transition font-medium"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.current}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.current}</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-2.5 text-slate-400 font-mono text-[10px]">₨</span>
+                  <span className="absolute left-3.5 top-2.5 text-slate-400 text-xs font-semibold">₨</span>
                   <input
                     type="number"
                     placeholder="e.g. 10000"
                     value={currentAmount}
                     onChange={(e) => setCurrentAmount(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-2 pl-8 pr-4 text-white focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 pl-8 pr-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-600 transition font-medium"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.targetDate}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.targetDate}</label>
                 <input
                   type="date"
                   required
                   value={targetDate}
                   onChange={(e) => setTargetDate(e.target.value)}
-                  className="w-full bg-[#111827] border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white focus:outline-none focus:border-blue-600 transition font-medium"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-gradient-to-r from-[#6C63FF] to-[#00D4AA] text-white font-semibold rounded-xl shadow-md transition"
+                className="w-full py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 text-white font-medium rounded-xl shadow-md transition text-xs mt-2"
               >
                 Create Goal
               </button>

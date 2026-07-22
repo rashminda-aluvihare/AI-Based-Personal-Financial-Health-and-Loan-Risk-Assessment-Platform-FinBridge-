@@ -199,92 +199,92 @@ export default function LoansPage() {
         </div>
       </div>
 
-      {/* Add Loan Modal */}
+      {/* Add Loan Modal Overlay */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0A0E1A]/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md glass-panel p-6 rounded-3xl glow-amber space-y-4">
-            <div className="flex justify-between items-center">
-              <h3 className="font-bold text-base text-white">{t.addLoan}</h3>
-              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-white transition">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-white/10 p-6 rounded-3xl space-y-5 shadow-2xl">
+            <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-white/10">
+              <h3 className="font-bold text-base text-slate-900 dark:text-white">{t.addLoan}</h3>
+              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition p-1">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.loanName}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.loanName}</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Bank of Ceylon Cash Loan"
                   value={loanName}
                   onChange={(e) => setLoanName(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-amber-500 transition font-medium"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.remainingAmount}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.remainingAmount}</label>
                 <input
                   type="number"
                   required
                   placeholder="e.g. 250000"
                   value={remainingAmount}
                   onChange={(e) => setRemainingAmount(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-amber-500 transition font-medium"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.emi}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.emi}</label>
                 <input
                   type="number"
                   required
                   placeholder="e.g. 15000"
                   value={monthlyEmi}
                   onChange={(e) => setMonthlyEmi(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-amber-500 transition font-medium"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.interestRate}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.interestRate}</label>
                 <input
                   type="number"
                   required
                   placeholder="e.g. 14"
                   value={interestRate}
                   onChange={(e) => setInterestRate(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-amber-500 transition font-medium"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono text-slate-500 uppercase block">Start Date</label>
+                  <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">Start Date</label>
                   <input
                     type="date"
                     required
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full bg-[#111827] border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition font-medium"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono text-slate-500 uppercase block">End Date</label>
+                  <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">End Date</label>
                   <input
                     type="date"
                     required
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full bg-[#111827] border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition font-medium"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-gradient-to-r from-[#6C63FF] to-amber-500 text-white font-semibold rounded-xl shadow-md transition"
+                className="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-xl shadow-md transition text-xs mt-2"
               >
                 Log Liability
               </button>

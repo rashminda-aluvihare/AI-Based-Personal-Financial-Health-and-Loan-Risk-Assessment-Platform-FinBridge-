@@ -165,60 +165,60 @@ export default function ExpensePage() {
         </div>
       </div>
 
-      {/* Add Expense Overlay Modal */}
+      {/* Add Expense Modal Overlay */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-white/10 p-6 rounded-3xl space-y-4 shadow-xl">
-            <div className="flex justify-between items-center">
+          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-white/10 p-6 rounded-3xl space-y-5 shadow-2xl">
+            <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-white/10">
               <h3 className="font-bold text-base text-slate-900 dark:text-white">{t.addExpense}</h3>
-              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
+              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition p-1">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div className="space-y-1.5">
-                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">{t.category}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.category}</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500 transition font-medium"
                 >
                   {categoriesList.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
+                    <option key={cat} value={cat} className="bg-white text-slate-900 dark:bg-[#1E293B] dark:text-white">{cat}</option>
                   ))}
                 </select>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.amount}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.amount}</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-2.5 text-slate-400 font-mono text-[10px]">₨</span>
+                  <span className="absolute left-3.5 top-2.5 text-slate-400 text-xs font-semibold">₨</span>
                   <input
                     type="number"
                     required
                     placeholder="e.g. 1500"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-2 pl-8 pr-4 text-white focus:outline-none focus:border-rose-400"
+                    className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 pl-8 pr-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-rose-500 transition font-medium"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono text-slate-500 uppercase block">{t.date}</label>
+                <label className="text-[11px] text-slate-600 dark:text-slate-300 uppercase font-medium block tracking-wider">{t.date}</label>
                 <input
                   type="date"
                   required
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-[#111827] border border-white/10 rounded-xl py-2 px-3 text-white focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl py-2.5 px-3.5 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500 transition font-medium"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-gradient-to-r from-[#6C63FF] to-[#FF6B6B] text-white font-semibold rounded-xl shadow-md transition"
+                className="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-xl shadow-md transition text-xs mt-2"
               >
                 Log Expense
               </button>
